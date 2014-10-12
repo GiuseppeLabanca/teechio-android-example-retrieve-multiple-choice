@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main2);
-		Teech.init("0wXXXXXXXXXXXXXXXXXXXXXXXXXXXXXc", "b7xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7d9"); // insert your apiKey and appKey and we are ready!!! :D
+		Teech.init("XXXXXXXXXXapi-keyXXXXXXXXXXXXXXXXXXXXc", "xxxxxxxxxxxxxxAPP-IDxxxxxxxxxxxxxxxxxxx"); // insert your apiKey and appKey and we are ready!!! :D
 		
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -66,11 +66,12 @@ public class MainActivity extends Activity {
 			JSONArray result = null;
 			try {
 				JSONObject constraints = new JSONObject();
-				constraints.put("title", "UK capital city");
+				constraints.put("title", "UK capital city"); //query in TeechMaterial with "title"="UK capital city"
 				result = q.search(constraints).get();
 			} catch (InvalidRequestException e) {
 				e.printStackTrace();
 			} catch (TeechAuthenticationException e) {
+				System.out.println("You must insert a valid API-KEY and a valid APP-ID");
 				e.printStackTrace();
 			} catch (APIConnectionException e) {
 				e.printStackTrace();
@@ -79,6 +80,10 @@ public class MainActivity extends Activity {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
+			if(result.length()==0){
+				System.out.println("You need to insert a TeechioMaterial, go to your dashboard at www.teech.io");
+			}
+			
 			return result.toString();
 		}
 	
